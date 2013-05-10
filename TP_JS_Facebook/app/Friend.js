@@ -1,1 +1,3 @@
-FbApp.Friend = Backbone.Model.extend({});
+FbApp.Friend = Backbone.Model.extend({
+
+});

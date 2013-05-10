@@ -18,7 +18,8 @@
     <![endif]-->
 
     <!-- Inclusion du style CSS de l'app -->
-    <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
   </head>
 
   <body>
@@ -29,13 +30,11 @@
           <h2 class="app-heading">Fb Friends App</h2>
           <!-- btn-group, see: http://twitter.github.com/bootstrap/components.html#buttonGroups -->
           <div class="span12 app-toolbar btn-group">
+            <input type="text" id="search" placeholder="Search by name, surname, activities.." />
             <button class="btn" id="byName">Sort by name</button>
             <button class="btn" id="byBirthday">Sort by birthday</button>
           </div>
-          <hr/>
-          <div class="friend-list row">
-
-          </div>
+          <div class="friend-list row"></div>
         </div>
       </div>
     </div>
@@ -43,49 +42,45 @@
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+    <script id="friendTmpl" type="text/x-template" charset="utf-8">
+      <div class="media">
+        <a class="pull-left">
+          <img class="media-object" data-src="holder.js/64x64" alt="64x64" style="width: 64px; height: 64px;" src="<%= pic_big %>">
+        </a>
+        <div class="media-body">
+          <h4 class="media-heading"><a href="<%= profile_url %>"><%= sort_first_name %> <%= sort_last_name %></a></h4>
+          <small><%= birthday_date %></small>
+          <small><%= activities %></small>
+          <small><%= relationship_status %></small><br/>
+        </div>
+      </div>
+    </script>
     <script src="js/getFriends.js"></script>
     <script src="js/jquery-1.9.0.js"></script>
     <script src="js/bootstrap.2.2.2.js"></script>
-    <script src="js/underscore-min.js" type="text/javascript"></script>
+    <script src="js/lodash.1.2.0.js"></script>
+    <script src="js/underscore.flatten.js"></script>
     <!-- Underscore est une dépendance de Backbone, à intégrer avant Backbone -->
     <script src="js/backbone.1.0.0.js" type="text/javascript"></script>
-    <script id="friendTmpl" type="text/x-template" charset="utf-8">
-    <div class="media">
-      <a class="pull-left">
-      <img class="media-object" data-src="holder.js/64x64" alt="64x64" style="width: 64px; height: 64px;" src="<%= pic_big %>">
-      </a>
-      <div class="media-body">
-        <h4 class="media-heading"><a href="<%= profile_url %>"><%= sort_first_name %> <%= sort_last_name %></a></h4>
-        <%= relationship_status %>
-      </div>
-    </div>
-    </script>
+   
     <script type="text/javascript">
     var FbApp = {};
     </script>
-    <script src="app/Friend.js" type="text/javascript"></script>
-    <script src="app/Friends.js" type="text/javascript"></script>
-    <script src="app/FriendView.js" type="text/javascript"></script>
-    <script src="app/FriendsView.js" type="text/javascript"></script>
-    <script src="app/AppView.js" type="text/javascript"></script>
+    <script src="app/Friend.js" type="text/javascript" charset="utf-8"></script>
+    <script src="app/Friends.js" type="text/javascript" charset="utf-8"></script>
+    <script src="app/FriendView.js" type="text/javascript" charset="utf-8"></script>
+    <script src="app/AppView.js" type="text/javascript" charset="utf-8"></script>
     <!-- Inclusion des HighCharts -->
-    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="js/Highcharts-3.0.1/js/highcharts.js"></script>
     <script type="text/javascript">
     FbApp.init = function(){
-        var myFriends = new FbApp.Friends(); // Création de collection d'amis
-
-        // Initialisation de AppView
+        var myFriends = new FbApp.Friends();
         var myApp = new FbApp.AppView({
           collection:myFriends,
-          el:$('.app')[0]
+          el: $('.app')[0]
         });
         myFriends.reset(getFriends());
-
-        // Affichage du premier ami
-        /*$('.friend-list').append(
-          new FbApp.FriendView({model:myFriends.at(0)}).render().$el
-          );*/
-        };
+      };
       FbApp.init();
     </script>
 </body>

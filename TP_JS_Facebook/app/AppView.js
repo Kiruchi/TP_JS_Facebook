@@ -1,33 +1,38 @@
-// Création de AppView
 FbApp.AppView = Backbone.View.extend({
-	events:{
-		'click #byName':'sortByName',
-		'click #byBirthday':'sortByBirthday'
-	},
+  events:{
+    'click #byName':'sortByName',
+    'click #byBirthday':'sortByBirthday',
+    'keyup #search':'search'
+  },
 
-	initialize: function(friends){
-		this.collection.on('reset', this.render, this);
-		this.$friendList = this.$el.find('.friend-list');
-	},
+  initialize: function(){
+    this.collection.on('reset', this.render, this);
+    this.$friendList = this.$el.find('.friend-list');
+  },
 
-	sortByName: function(){
-		this.collection.sortByName();
-	},
+  search: function(e){
+    this.collection.search(e.currentTarget.value);
+  },
 
-	sortByBirthday: function(){
-		this.collection.sortByBirthday();
-	},
+  sortByName: function(){
+    this.collection.sortByName();
+  },
 
-	render: function(collection){
-		this.$friendList.empty(); // Reset la friend-list
+  sortByBirthday: function(){
+    this.collection.sortByBirthday();
+  },
 
-		var $container = $('<div/>'); // On charge le container puis on l'insère à la fin pour éviter d'injecter dans le DOM peu à peu
+  render: function(collection){
+    this.$friendList.empty();
 
-		collection.forEach(function(friend){
-			var view = new FbApp.FriendView({model: friend});
-			$container.append(view.render().$el);
-		},this);
+    var $container = $('<div/>');
 
-		this.$friendList.append($container);
-	}
+    collection.forEach(function(friend){
+      var view = new FbApp.FriendView({model: friend});
+      $container.append(view.render().$el);
+    }, this);
+
+    this.$friendList.append($container);
+  }
 });
+
