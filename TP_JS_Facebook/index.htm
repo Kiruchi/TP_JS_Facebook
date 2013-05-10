@@ -1,51 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>FB Friend App</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
+<head>
+  <meta charset="utf-8">
+  <title>FB Friend App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-    <!-- Le styles -->
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <style type="text/css">
-      body {
-        padding-top: 40px;
-        padding-bottom: 40px;
-        background-color: #f5f5f5;
-      }
+  <!-- Le style -->
+  <!-- Inclusion de Bootstrap -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <!-- Inclusion de Font-awesome -->
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <!-- Inclusion de Font-awesome pour IE7 (Engueuler celui qui a décidé du support d'IE7 au préalable.) -->
+    <!--[if IE 7]>
+    <link rel="stylesheet" href="css/font-awesome-ie7.min.css">
+    <![endif]-->
 
-      .app {
-        -webkit-box-sizing: border-box;
-           -moz-box-sizing: border-box;
-                box-sizing: border-box;
-        padding: 19px 29px 29px;
-        margin: 0 auto 20px;
-        background-color: #fff;
-        border: 1px solid #e5e5e5;
-        -webkit-border-radius: 5px;
-           -moz-border-radius: 5px;
-                border-radius: 5px;
-        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
-           -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
-                box-shadow: 0 1px 2px rgba(0,0,0,.05);
-      }
-      .app .app-heading,
-      .app .checkbox {
-        margin-bottom: 10px;
-      }
-      .app input[type="text"],
-      .app input[type="password"] {
-        font-size: 16px;
-        height: auto;
-        margin-bottom: 15px;
-        padding: 7px 9px;
-      }
-
-      .app-toolbar{padding: 10px 0px;margin-left: 0px !important;}
-      .app .friend-item{margin-bottom:10px;}
-    </style>
+    <!-- Inclusion du style CSS de l'app -->
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
   </head>
 
   <body>
@@ -61,7 +34,7 @@
           </div>
           <hr/>
           <div class="friend-list row">
-            
+
           </div>
         </div>
       </div>
@@ -73,29 +46,32 @@
     <script src="js/getFriends.js"></script>
     <script src="js/jquery-1.9.0.js"></script>
     <script src="js/bootstrap.2.2.2.js"></script>
-    <script src="js/underscore-min.js" type="text/javascript"></script><!-- Underscore est une dépendance de Backbone, à intégrer avant Backbone -->
+    <script src="js/underscore-min.js" type="text/javascript"></script>
+    <!-- Underscore est une dépendance de Backbone, à intégrer avant Backbone -->
     <script src="js/backbone.1.0.0.js" type="text/javascript"></script>
     <script id="friendTmpl" type="text/x-template" charset="utf-8">
-      <div class="media">
-        <a class="pull-left">
-          <img class="media-object" data-src="holder.js/64x64" alt="64x64" style="width: 64px; height: 64px;" src="<%= pic_big %>">
-        </a>
-        <div class="media-body">
-          <h4 class="media-heading"><a href="<%= profile_url %>"><%= sort_first_name %> <%= sort_last_name %></a></h4>
-          <%= relationship_status %>
-        </div>
+    <div class="media">
+      <a class="pull-left">
+      <img class="media-object" data-src="holder.js/64x64" alt="64x64" style="width: 64px; height: 64px;" src="<%= pic_big %>">
+      </a>
+      <div class="media-body">
+        <h4 class="media-heading"><a href="<%= profile_url %>"><%= sort_first_name %> <%= sort_last_name %></a></h4>
+        <%= relationship_status %>
       </div>
+    </div>
     </script>
     <script type="text/javascript">
-      var FbApp = {};
+    var FbApp = {};
     </script>
     <script src="app/Friend.js" type="text/javascript"></script>
     <script src="app/Friends.js" type="text/javascript"></script>
     <script src="app/FriendView.js" type="text/javascript"></script>
     <script src="app/FriendsView.js" type="text/javascript"></script>
     <script src="app/AppView.js" type="text/javascript"></script>
+    <!-- Inclusion des HighCharts -->
+    <script src="http://code.highcharts.com/highcharts.js"></script>
     <script type="text/javascript">
-      FbApp.init = function(){
+    FbApp.init = function(){
         var myFriends = new FbApp.Friends(); // Création de collection d'amis
 
         // Initialisation de AppView
@@ -108,9 +84,9 @@
         // Affichage du premier ami
         /*$('.friend-list').append(
           new FbApp.FriendView({model:myFriends.at(0)}).render().$el
-        );*/
-      };
+          );*/
+        };
       FbApp.init();
     </script>
-  </body>
+</body>
 </html>
