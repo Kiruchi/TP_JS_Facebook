@@ -19,13 +19,20 @@
   -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
   box-shadow: 0 1px 2px rgba(0,0,0,.05);
 }
+
 .app .app-heading,
 .app .checkbox {
   margin-bottom: 10px;
 }
+
 .app input[type="text"],
 .app input[type="password"] {
+  margin-bottom: 10px;
+}
 
+.page-header {
+  margin-right: 80px;
+  margin-bottom: 10px;
 }
 
 .app-toolbar{padding: 10px 0px;margin-left: 0px !important;}
