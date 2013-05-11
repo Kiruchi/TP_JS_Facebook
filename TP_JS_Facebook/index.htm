@@ -29,10 +29,12 @@
         <div class="span12">
           <h2 class="app-heading">Fb Friends App</h2>
           <!-- btn-group, see: http://twitter.github.com/bootstrap/components.html#buttonGroups -->
-          <div class="span12 app-toolbar btn-group">
-            <input type="text" id="search" placeholder="Search by name, surname, activities.." />
-            <button class="btn" id="byName">Sort by name</button>
-            <button class="btn" id="byBirthday">Sort by birthday</button>
+          <div class="span12 app-toolbar">
+            <div class="input-append">
+              <input class="span3" type="text" id="search" placeholder="Search by name, surname, activities.." />
+              <button class="btn" id="byName">Sort by name</button>
+              <button class="btn" id="byBirthday">Sort by birthday</button>
+           </div>
           </div>
           <div class="friend-list row"></div>
         </div>
