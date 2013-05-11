@@ -49,13 +49,13 @@
     <script id="friendTmpl" type="text/x-template" charset="utf-8">
       <div class="media">
         <a class="pull-left">
-          <img class="media-object" data-src="holder.js/64x64" alt="64x64" style="width: 64px; height: 64px;" src="<%= pic_big %>">
+          <img class="media-object thumbnail" data-src="holder.js/64x64" alt="64x64" style="width: 64px; height: 64px;" src="<%= pic_big %>">
         </a>
         <div class="media-body">
           <h4 class="media-heading"><a href="<%= profile_url %>"><%= sort_first_name %> <%= sort_last_name %></a></h4>
-          <small><%= birthday_date %></small>
-          <small><%= activities %></small>
-          <small><%= relationship_status %></small><br/>
+          <i class="icon-calendar"></i> <small><%= birthday_date %></small><br/>
+          <small><strong>Activities :</strong> <%= activities %></small><br/>
+          <small><strong>Relationship status :</strong> <%= relationship_status %></small><br/>
         </div>
       </div>
     </script>

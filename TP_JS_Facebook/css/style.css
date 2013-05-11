@@ -36,4 +36,11 @@
 }
 
 .app-toolbar{padding: 10px 0px;margin-left: 0px !important;}
-.app .friend-item{margin-bottom:10px;}
+.app .friend-item{
+  padding: 10px;
+  padding-right: 25px;
+  margin-left: 20px;
+  margin-bottom: 10px;
+  margin-right: -45px;
+
+}
