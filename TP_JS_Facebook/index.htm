@@ -25,38 +25,54 @@
   <body>
 
     <div class="container">
+      <div class="navbar barTitle">
+        <div class="navbar-inner">
+          <a class="brand" href="#"><i class="icon-facebook-sign"></i> Facebook app <small>Everything about your Facebook's friends.</small></a>
+          <div class="input-append app-toolbar">
+            <input class="span3" type="text" id="search" placeholder="Search by name, surname, activities..." />
+            <button class="btn" id="byName">Sort by name</button>
+            <button class="btn" id="byBirthday">Sort by birthday</button>
+          </div>
+        </div>
+      </div>
+
       <div class="app row">
         <div class="span12">
-          <div class="page-header">
-            <h2 class="app-heading"><i class="icon-facebook-sign"></i> Facebook Friends App <small>All you want to know about your Facebook's friends.</small></h2>
-          </div>
-          <!-- btn-group, see: http://twitter.github.com/bootstrap/components.html#buttonGroups -->
-          <div class="span12 app-toolbar">
-            <div class="input-append">
-              <input class="span3" type="text" id="search" placeholder="Search by name, surname, activities.." />
-              <button class="btn" id="byName">Sort by name</button>
-              <button class="btn" id="byBirthday">Sort by birthday</button>
-            </div>
-          </div>
-          <div class="tabbable tabs-left chartsTabs"> <!-- Only required for left/right tabs -->
+          <div class="tabbable">
             <ul class="nav nav-tabs">
-              <li class="active"><a href="#tab1" data-toggle="tab">Age</a></li>
-              <li><a href="#tab2" data-toggle="tab">Sex</a></li>
-              <li><a href="#tab3" data-toggle="tab">Relationship status</a></li>
+              <li class="active"><a href="#tab1" data-toggle="tab">Friends</a></li>
+              <li><a href="#tab2" data-toggle="tab">Charts</a></li>
             </ul>
             <div class="tab-content">
               <div class="tab-pane active" id="tab1">
-                <p>Section age</p>
+                <!-- Affichage des amis -->
+                <div class="page-header">
+                  <h3>Friends <small>Informations about your friends !</small></h3>
+                </div><br>
+                <div class="friend-list row"></div>
               </div>
+
               <div class="tab-pane" id="tab2">
-                <p>Section sex</p>
-              </div>
-              <div class="tab-pane" id="tab3">
-                <p>Section relationship status</p>
+                <!-- Charts -->
+                <div class="page-header">
+                  <h3>Charts <small>Choose the chart you want to display !</small></h3>
+                </div><br>
+                <div class="tabbable tabs-left">
+                  <ul class="nav nav-tabs">
+                    <li class="active"><a  id="age" href="#tab3" data-toggle="tab">Age</a></li>
+                    <li><a id="sex" href="#tab4" data-toggle="tab">Sex</a></li>
+                    <li><a id="rs" href="#tab5" data-toggle="tab">Relationship status</a></li>
+                  </ul>
+                  <div class="tab-content span8">
+                    <div class="tab-pane active chartsTab">
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-          <div class="friend-list row"></div>
+          <br>
+          
         </div>
       </div>
     </div>
@@ -77,7 +93,7 @@
     </div>
     </div>
     </script>
-    <script src="js/getFriends.js"></script>
+    <script src="getFriends.js"></script>
     <script src="js/jquery-1.9.0.js"></script>
     <script src="js/bootstrap.2.2.2.js"></script>
     <script src="js/lodash.1.2.0.js"></script>
@@ -91,16 +107,56 @@
     <script src="app/Friend.js" type="text/javascript" charset="utf-8"></script>
     <script src="app/Friends.js" type="text/javascript" charset="utf-8"></script>
     <script src="app/FriendView.js" type="text/javascript" charset="utf-8"></script>
+    <script src="app/charts/ChartModel.js" type="text/javascript" charset="utf-8"></script>
+    <script src="app/charts/ChartView.js" type="text/javascript" charset="utf-8"></script>
+    <script src="app/charts/SexChartModel.js" type="text/javascript" charset="utf-8"></script>
+    <script src="app/charts/SexChartView.js" type="text/javascript" charset="utf-8"></script>
+    <script src="app/charts/AgeChartModel.js" type="text/javascript" charset="utf-8"></script>
+    <script src="app/charts/AgeChartView.js" type="text/javascript" charset="utf-8"></script>
+    <script src="app/charts/RelationShipChartModel.js" type="text/javascript" charset="utf-8"></script>
+    <script src="app/charts/RelationShipChartView.js" type="text/javascript" charset="utf-8"></script>
     <script src="app/AppView.js" type="text/javascript" charset="utf-8"></script>
     <!-- Inclusion de HighCharts -->
     <script src="js/Highcharts-3.0.1/js/highcharts.js"></script>
     <script type="text/javascript">
     FbApp.init = function(){
       var myFriends = new FbApp.Friends();
+      var myRelationShipChartModel = new FbApp.RelationShipChartModel({
+       collection:myFriends
+     });
+
+      var myRelationShipChartView = new FbApp.RelationShipChartView({
+        model:myRelationShipChartModel,
+        el:$('.chartsTabs')[0]
+      });
+
+      var mySexChartModel = new FbApp.SexChartModel({
+       collection:myFriends
+     });
+
+      var mySexChartView = new FbApp.SexChartView({
+        model:mySexChartModel,
+        el:$('.chartsTabs')[0]
+      });
+
+      var myAgeChartModel = new FbApp.AgeChartModel({
+       collection:myFriends
+     });
+
+      var myAgeChartView = new FbApp.AgeChartView({
+        model:myAgeChartModel,
+        el:$('.chartsTabs')[0]
+      });
+
       var myApp = new FbApp.AppView({
         collection:myFriends,
-        el: $('.app')[0]
+        el: $('.container')[0]
       });
+
+      myApp.relationShipView = myRelationShipChartView;
+      myApp.sexView = mySexChartView;
+      myApp.ageView = myAgeChartView;
+
       myFriends.reset(getFriends());
     };
     FbApp.init();

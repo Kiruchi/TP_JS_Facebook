@@ -2,7 +2,10 @@ FbApp.AppView = Backbone.View.extend({
   events:{
     'click #byName':'sortByName',
     'click #byBirthday':'sortByBirthday',
-    'keyup #search':'search'
+    'keyup #search':'search',
+    'click #rs' : 'showRelationShipChart',
+    'click #sex' : 'showSexChart',
+    'click #age' : 'showAgeChart'
   },
 
   initialize: function(){
@@ -20,6 +23,18 @@ FbApp.AppView = Backbone.View.extend({
 
   sortByBirthday: function(){
     this.collection.sortByBirthday();
+  },
+
+  showRelationShipChart: function(){
+    this.relationShipView.render();
+  },
+
+  showSexChart: function(){
+    this.sexView.render();
+  },
+
+  showAgeChart: function(){
+    this.ageView.render();
   },
 
   render: function(collection){
