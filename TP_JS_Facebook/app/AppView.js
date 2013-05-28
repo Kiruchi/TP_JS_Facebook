@@ -5,7 +5,8 @@ FbApp.AppView = Backbone.View.extend({
     'keyup #search':'search',
     'click #rs' : 'showRelationShipChart',
     'click #sex' : 'showSexChart',
-    'click #age' : 'showAgeChart'
+    'click #age' : 'showAgeChart',
+    'click #count' : 'showCountChart'
   },
 
   initialize: function(){
@@ -35,6 +36,10 @@ FbApp.AppView = Backbone.View.extend({
 
   showAgeChart: function(){
     this.ageView.render();
+  },
+
+  showCountChart: function(){
+    this.countView.render();
   },
 
   render: function(collection){

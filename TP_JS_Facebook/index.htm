@@ -62,6 +62,7 @@
                     <li class="active"><a  id="age" href="#tab3" data-toggle="tab">Age</a></li>
                     <li><a id="sex" href="#tab4" data-toggle="tab">Sex</a></li>
                     <li><a id="rs" href="#tab5" data-toggle="tab">Relationship status</a></li>
+                    <li><a id="count" href="#tab6" data-toggle="tab">Friends Count</a></li>
                   </ul>
                   <div class="tab-content span8">
                     <div class="tab-pane active chartsTab">
@@ -113,6 +114,8 @@
     <script src="app/charts/SexChartView.js" type="text/javascript" charset="utf-8"></script>
     <script src="app/charts/AgeChartModel.js" type="text/javascript" charset="utf-8"></script>
     <script src="app/charts/AgeChartView.js" type="text/javascript" charset="utf-8"></script>
+    <script src="app/charts/CountChartModel.js" type="text/javascript" charset="utf-8"></script>
+    <script src="app/charts/CountChartView.js" type="text/javascript" charset="utf-8"></script>
     <script src="app/charts/RelationShipChartModel.js" type="text/javascript" charset="utf-8"></script>
     <script src="app/charts/RelationShipChartView.js" type="text/javascript" charset="utf-8"></script>
     <script src="app/AppView.js" type="text/javascript" charset="utf-8"></script>
@@ -141,10 +144,19 @@
 
       var myAgeChartModel = new FbApp.AgeChartModel({
        collection:myFriends
-     });
+      });
+
+      var myCountChartModel = new FbApp.CountChartModel({
+       collection:myFriends
+      });
 
       var myAgeChartView = new FbApp.AgeChartView({
         model:myAgeChartModel,
+        el:$('.chartsTabs')[0]
+      });
+
+      var myCountChartView = new FbApp.CountChartView({
+        model:myCountChartModel,
         el:$('.chartsTabs')[0]
       });
 
@@ -156,6 +168,7 @@
       myApp.relationShipView = myRelationShipChartView;
       myApp.sexView = mySexChartView;
       myApp.ageView = myAgeChartView;
+      myApp.countView = myCountChartView;
 
       myFriends.reset(getFriends());
     };
