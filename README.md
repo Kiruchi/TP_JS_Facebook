@@ -1,4 +1,4 @@
 TP_JS_Facebook
 ==============
 
-TP sur Facebook avec JS
+TP sur Facebook avec JS (Backbone)
